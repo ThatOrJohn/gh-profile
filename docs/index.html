@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101521">
+  <meta name="description" content="Follow Bolt and his oversized jetpack on a never-ending trip around Earth.">
+  <title>Bolt’s World Tour</title>
+  <link rel="icon" href="assets/bolt.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="assets/vendor/d3-array.min.js"></script>
+  <script defer src="assets/vendor/d3-geo.min.js"></script>
+  <script defer src="flight.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="site-header">
+      <a class="profile" href="https://github.com/ThatOrJohn">ThatOrJohn <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <div class="intro">
+        <h1>Bolt’s World Tour<span>.</span></h1>
+        <p>One robot, an oversized jetpack, and absolutely no itinerary.</p>
+      </div>
+
+      <div class="flight-deck">
+        <section class="earth" aria-label="Interactive globe">
+          <div class="viewport" id="viewport">
+            <canvas id="globe" tabindex="0" aria-label="Globe showing Bolt’s route" aria-describedby="globe-help">
+              The flight tracker lists Bolt’s destinations and landings.
+            </canvas>
+            <div class="view-header">
+              <span class="view-label"><span aria-hidden="true">✦</span> Earth</span>
+              <button class="follow" id="follow" type="button" aria-pressed="true" disabled>
+                <span class="crosshair" aria-hidden="true"></span> Follow Bolt
+              </button>
+            </div>
+            <p class="map-message" id="map-message" role="status">Loading the globe…</p>
+          </div>
+          <div class="map-footer">
+            <span id="globe-help">Drag or use arrow keys to rotate</span>
+            <span class="coordinates" id="coordinates" aria-label="Bolt’s coordinates"></span>
+          </div>
+        </section>
+
+        <aside class="tracker" aria-label="Flight tracker">
+          <div class="tracker-heading">
+            <h2>Flight tracker</h2>
+            <span class="status" id="status">Starting</span>
+          </div>
+
+          <div class="route" role="status" aria-atomic="true">
+            <p class="origin" id="origin"></p>
+            <p class="destination" id="destination">Preparing for takeoff</p>
+            <p class="region" id="region"></p>
+          </div>
+          <progress id="progress" max="1" value="0" aria-label="Current flight progress"></progress>
+
+          <div class="pilot">
+            <img src="assets/bolt.png" alt="" width="46" height="58">
+            <p id="quip">“I read the first page of the manual.”</p>
+          </div>
+
+          <div class="actions">
+            <button class="pause" id="pause" type="button" disabled><span aria-hidden="true">Ⅱ</span> Pause</button>
+            <button class="skip" id="skip" type="button" disabled>Skip stop <span aria-hidden="true">→</span></button>
+          </div>
+
+          <div class="log">
+            <h3>Recent landings</h3>
+            <ol id="landings"></ol>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <span>Each visit starts a fresh trip.</span>
+      <a href="https://www.naturalearthdata.com/">Map data from Natural Earth <span aria-hidden="true">↗</span></a>
+    </footer>
+  </div>
+</body>
+</html>
